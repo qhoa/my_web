@@ -1,0 +1,12 @@
+{% extends "master.html" %}
+{% block title %}Detail information of member{% endblock %}
+
+{% block content %}
+    <p><h1>Name: {{ detailmember.lastname }} {{ detailmember.firstname }}</h1></p>
+    <ul>
+        <p><li><h6>Phone: {{ detailmember.phone }}</h6></li></p>
+        <p><li><h6>Joined Date: {{ detailmember.joined_date }}</h6></li></p>
+        <p><img src="{{ MEDIA_URL }}{{ detailmember.picture }}" alt="connect" style="max-height:100px"></p>
+    </ul>
+    <p><a href="/members"> Back to members</a></p>
+{% endblock %}

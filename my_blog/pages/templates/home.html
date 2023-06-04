@@ -1,0 +1,11 @@
+{% extends "master.html" %}
+{% block title %}Home Pages{% endblock %}
+
+{% block content %}
+    <h1>Message board home pages</h1>
+    <ul>
+        {% for x in all_post %}
+        <li>{{ x.text }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

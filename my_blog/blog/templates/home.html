@@ -1,0 +1,11 @@
+<!-- templates/home.html -->
+{% extends 'master.html' %}
+{% block title%}Home pages{% endblock %}
+{% block content %}
+  {% for x in all_post %}
+    <div class="post-entry">
+      <h4><a href="">{{ x.title }}</a></h4>
+      <p>{{ x.body }}</p>
+    </div>
+  {% endfor %}
+{% endblock %}

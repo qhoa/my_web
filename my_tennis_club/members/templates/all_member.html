@@ -1,0 +1,27 @@
+{% extends "master.html" %}
+{% block title %}All member of the tennis club{% endblock %}
+
+{% block content %}
+    <h1>Members:</h1>
+    <div class="table-responsive">
+    <table class="table" style="width: 100%;">
+        <tr class="table-primary">
+            <th>No</th>
+            <th>Picture</th>
+            <th>Firstname</th>
+            <th>Lastname</th>
+            <th>Contact Detail</th>
+        </tr>
+        {% for i in allmember %}
+        <tr class="table-light">
+            <td>{{ i.id }}</td>
+            <td><img src="{{ MEDIA_URL }}{{ i.picture }}" alt="connect" style="max-height:50px"></td>
+            <td>{{ i.firstname }}</td>
+            <td>{{ i.lastname }}</td>
+            <td><a href="details/{{ i.id }}"> ...</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </div>
+    <p><a href="/">Main pages</a></p>
+{% endblock %}
