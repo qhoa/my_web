@@ -1,0 +1,57 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <title>{% block title %}{% endblock %}</title>
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
+</head>
+<body>
+    <header>
+        <div class="nav-left">
+            <h1><a href="{% url 'home' %}" > My Blog</a></h1>
+        </div>
+        <div class="">
+            {% if user.is_authenticated %}
+                <p>hi {{ user.username }}!</p>
+                <a href="{% url 'logout' %}">Log out</a>
+            {% else %}
+                <p>You are not logged in.</p>
+            {% endif %}
+        </div>
+    </header>
+<div class="row">
+    <div class="col-md-2">
+        <ul>
+            <li><a href="{% url 'home' %}">Main pages</a></li>
+            <li><a href="{% url 'post_new' %}">News post</a></li>
+            <li>Accounts</li>
+                <ul>
+                {% if user.is_anonymous %}
+                    <li><a href="{% url 'login' %}">Log in</a></li>
+                    <li><a href="{% url 'sign_up' %}">Sign up</a></li>
+                {% else %}
+                    <li><a href="{% url 'password_change' %}">Password change</a></li>
+                    <li><a href="{% url 'password_reset' %}">Password reset</a></li>
+                {% endif %}
+                </ul>
+        {% if user.is_superuser %}
+            <li><a href="/admin">Admin</a></li>
+        {% endif %}    
+        </ul>
+    </div>
+    <div class="col-md-8">
+        {% block content %}
+        {% endblock %}
+    </div>
+    <div class="col-md-2">
+        
+    </div>
+</div>
+</body>
+</html>

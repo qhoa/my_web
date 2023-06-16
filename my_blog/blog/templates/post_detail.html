@@ -5,7 +5,9 @@
     <div class="post-entry">
       <h1>{{ post.title }}</h1>
       <p>{{ post.body }}</p>
+      <h4>{{ comment.author }}</h4>
+      <p class="lead">{{ comment.comment }}</p>
     </div>
-    <a href="{% url 'post_update' post.id %}">Update |</a>
-    <a href="{% url 'post_delete' post.id %}">Delete</a>
+    <a class="btn btn-success" role="button" href="{% url 'post_update' post.id %}">Update</a>
+    <a class="btn btn-success" role="button" href="{% url 'post_delete' post.id %}">Delete</a>
 {% endblock %}

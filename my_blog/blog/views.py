@@ -1,8 +1,12 @@
-from django.shortcuts import render
-from .models import Post
-from django.views.generic import ListView
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
+from .models import Post, Comment
+from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
+from django.contrib.auth.forms import PasswordChangeForm
+from django.contrib.auth import update_session_auth_hash
+from django.contrib import messages
 
 def home(request):
     all_post = Post.objects.all().values()
@@ -10,7 +14,8 @@ def home(request):
 
 def post_detail(request, id):
     post = Post.objects.get(id=id)
-    return render(request, 'post_detail.html', {'post': post})
+    comment = Comment.objects.get(id=id)
+    return render(request, 'post_detail.html', {'post': post, 'comment': comment})
 
 class post_new(CreateView):
     model = Post

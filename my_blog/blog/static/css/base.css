@@ -6,7 +6,7 @@ body {
 
 header {
   border-bottom: 1px solid #999;
-  margin-bottom: 2rem;
+  margin-bottom: 0.5rem;
   display: flex;
 }
 
@@ -45,4 +45,25 @@ header h1 a {
 
 .post-entry h2 a:hover {
   color: red;
+}
+
+.column {
+  float: left;
+  padding: auto;
+  height: 500px;
+}
+
+.left {
+  width: 15%;
+}
+
+.right {
+  width: 85%;
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
 }
