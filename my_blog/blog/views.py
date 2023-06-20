@@ -4,13 +4,21 @@ from .models import Post, Comment
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
-from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth import update_session_auth_hash
 from django.contrib import messages
+from django.db.models import Q
 
 def home(request):
     all_post = Post.objects.all().values()
+    #all_post = Post.objects.filter(title__icontains='day')
     return render(request, 'home.html', {'all_post': all_post})
+
+def search(request):
+    search_result = []
+    query = request.GET.get('q')
+#    if query == '':
+#        query = ''
+    search_result = Post.objects.filter(Q(title__icontains=query) | Q(body__icontains=query))
+    return render(request, 'search_result.html', {'search_result': search_result})
 
 def post_detail(request, id):
     post = Post.objects.get(id=id)

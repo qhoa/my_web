@@ -1,11 +1,13 @@
 <!-- templates/home.html -->
 {% extends 'master.html' %}
 {% block title%}Content of blog{% endblock %}
+{% load crispy_forms_tags %}
 {% block content %}
       <h1>New Post</h1>
       <form action="" method="post">
         {% csrf_token %}
-        {{ form.as_p }}
-      <input type="submit" value="Save">
-      </form>  
+        {{ form|crispy }}
+      <input class="btn btn-success" type="submit" value="Save">
+      <input class="btn btn-success" type="reset" value="Reset">
+    </form>  
 {% endblock %}
