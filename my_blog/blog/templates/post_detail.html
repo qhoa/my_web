@@ -4,7 +4,7 @@
 {% block content %}
     <div class="post-entry">
       <h1>{{ post.title }}</h1>
-      <p>{{ post.body }}</p>
+      <p>{{ post.body | safe}}</p>
       <p></p>
       <hr>
       <figure>

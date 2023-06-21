@@ -2,6 +2,9 @@ from django.urls import path
 from blog import views
 from .views import post_new, post_delete, post_update
 from django.contrib.auth.decorators import login_required
+from django.conf.urls.static import static
+from django.conf import settings
+
 
 urlpatterns = [
     path('', views.home, name='home'),
@@ -11,3 +14,5 @@ urlpatterns = [
     path('post/<int:pk>/update/',  post_update.as_view(), name='post_update'),
     path('post/<int:pk>/delete/',  login_required(post_delete.as_view()), name='post_delete'),    
 ]
+# Path of media files
+urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

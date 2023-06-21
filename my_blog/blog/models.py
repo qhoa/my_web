@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib import auth
 from django.urls import reverse
+from ckeditor.fields import RichTextField
+from ckeditor_uploader.fields import RichTextUploadingField 
+
 
 class Post(models.Model):
     title = models.CharField(max_length=255)
@@ -8,7 +11,9 @@ class Post(models.Model):
         'auth.User', 
         on_delete=models.CASCADE,
     )
-    body = models.TextField()
+    #body = models.TextField()
+    #body = RichTextField()
+    body = RichTextUploadingField()
     def __str__(self):
         return self.title
     

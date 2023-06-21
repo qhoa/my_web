@@ -11,7 +11,7 @@
 -->
     <div class="bg-light p-2 rounded">
       <h2>{{ x.title }}</h2>
-      <p class="">{{ x.body }}</p>
+      <p class="">{{ x.body | safe}}</p>
       <p align="left">
         <a class="btn-sm btn-success" href="{% url 'post_detail' x.id %}" role="button">Details &raquo;</a>
       </p>
