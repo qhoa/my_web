@@ -22,8 +22,9 @@ def search(request):
 
 def post_detail(request, id):
     post = Post.objects.get(id=id)
-    comment = Comment.objects.get(id=id)
-    return render(request, 'post_detail.html', {'post': post, 'comment': comment})
+    #comment = Comment.objects.get(id=id)
+    query = Comment.objects.filter(title_id=id)
+    return render(request, 'post_detail.html', {'post': post, 'query': query})
 
 class post_new(CreateView):
     model = Post

@@ -4,11 +4,6 @@
 {% block content %}
 
   {% for x in all_post %}
-<!--    <div class="post-entry">
-      <h4><a href="{% url 'post_detail' x.id %}">{{ x.title }}</a></h4>
-      <p>{{ x.body }}</p>
-    </div>
--->
     <div class="bg-light p-2 rounded">
       <h2>{{ x.title }}</h2>
       <p class="">{{ x.body | safe}}</p>
