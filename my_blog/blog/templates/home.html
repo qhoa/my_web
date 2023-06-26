@@ -2,11 +2,10 @@
 {% extends 'master.html' %}
 {% block title%}Home pages{% endblock %}
 {% block content %}
-
   {% for x in all_post %}
-    <div class="bg-light p-2 rounded">
-      <h2>{{ x.title }}</h2>
-      <p class="">{{ x.body | safe}}</p>
+    <div class="bg-light p-2 rounded crop">
+      <h2>{{ x.title|title}}</h2>
+      <p class="">{{ x.body|truncatewords_html:40|safe }}</p>
       <p align="left">
         <a class="btn-sm btn-success" href="{% url 'post_detail' x.id %}" role="button">Details &raquo;</a>
       </p>

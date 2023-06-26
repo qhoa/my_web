@@ -6,19 +6,20 @@ from ckeditor_uploader.fields import RichTextUploadingField
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
-    description = RichTextField()
     def __str__(self):
         return self.name
 
+class SubCategory(models.Model):
+    parent = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
+    category = models.CharField(max_length=100, null=True)
+    def __str__(self):
+        return self.category
+
 class Post(models.Model):
     title = models.CharField(max_length=255)
-    author = models.ForeignKey(
-        'auth.User', 
-        on_delete=models.CASCADE,
-    )
-    #body = models.TextField()
-    #body = RichTextField()
-    #name = models.ForeignKey(Category, on_delete=models.CASCADE)
+    author = models.ForeignKey('auth.User', on_delete=models.CASCADE,)
+    category = models.ForeignKey(SubCategory, on_delete=models.CASCADE, null=True)
+    parent = models.ForeignKey(Category, on_delete=models.CASCADE, null=True)
     body = RichTextUploadingField()
     def __str__(self):
         return self.title
