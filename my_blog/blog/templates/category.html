@@ -1,0 +1,17 @@
+<!-- templates/home.html -->
+{% extends 'master.html' %}
+{% block title%}Category{% endblock %}
+{% block content %}
+  {% for category in all_category %}
+    <p>{{ category.name }}</p>
+      {% for sub in category.subcategory_set.all %}
+        <p>{{ sub.category }}</p>
+        <ul>
+          {% for post in sub.post_set.all %}
+            <li><p>{{ post.title }}</p></li>
+          {% endfor %}
+          </ul>
+      {% endfor %}
+  {% endfor %}
+    <p></p>
+{% endblock %}

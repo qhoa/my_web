@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Post, Comment
+from .models import Post, Comment, Category, SubCategory
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -9,8 +9,9 @@ from django.db.models import Q
 
 def home(request):
     all_post = Post.objects.all().values()
+    all_category = Category.objects.all()
     #all_post = Post.objects.filter(title__icontains='day')
-    return render(request, 'home.html', {'all_post': all_post})
+    return render(request, 'home.html', {'all_post': all_post, 'all_category': all_category})
 
 def search(request):
     search_result = []

@@ -3,7 +3,7 @@
 {% block title%}Home pages{% endblock %}
 {% block content %}
   {% for x in all_post %}
-    <div class="bg-light p-2 rounded crop">
+    <div class="bg-light p-2 rounded">
       <h2>{{ x.title|title}}</h2>
       <p class="">{{ x.body|truncatewords_html:40|safe }}</p>
       <p align="left">
@@ -11,5 +11,5 @@
       </p>
     </div>
     <p></p>
-    {% endfor %}
+  {% endfor %}
 {% endblock %}

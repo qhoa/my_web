@@ -1,7 +1,4 @@
 {% load static %}
-{% load bootstrap5 %}
-{% bootstrap_css %}
-{% bootstrap_javascript %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +6,9 @@
     <link rel="stylesheet" href="{% static 'css/base.css' %}">
     <link rel="stylesheet" href="{% static 'css/sidebars.css' %}">
     <title>{% block title %}{% endblock %}</title>
-
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    {% bootstrap_javascript %}
 </head>
 <body>
     <header class="p-3 bg-dark">
@@ -86,6 +85,19 @@
                 </div>
               </li>
             </ul>
+            <u class="list-unstyled ps-0">
+            {% for category in all_category %}
+    {{ category.name }}
+      {% for sub in category.subcategory_set.all %}
+        <p>{{ sub.category }}</p>
+        <ul>
+          {% for post in sub.post_set.all %}
+            <li><p><a href="{% url 'post_detail' post.id %}"> {{post.title }}</a></p></li>
+          {% endfor %}
+          </ul>
+      {% endfor %}
+  {% endfor %}
+</u>
     </div>
     <div class="col-md-10">
         {% block content %}
