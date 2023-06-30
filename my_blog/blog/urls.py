@@ -9,6 +9,7 @@ from django.conf import settings
 urlpatterns = [
     path('', views.home, name='home'),
     path('search/', views.search, name='search'),
+    path('category/', views.category, name='category'),
     path('post/<int:id>',views.post_detail, name='post_detail'),
     path('post/new', login_required(post_new.as_view()), name='post_new'),
     path('post/<int:pk>/update/',  post_update.as_view(), name='post_update'),

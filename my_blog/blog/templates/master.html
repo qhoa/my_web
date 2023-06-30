@@ -10,6 +10,7 @@
     {% bootstrap_css %}
     {% bootstrap_javascript %}
 </head>
+
 <body>
     <header class="p-3 bg-dark">
         <!--        <div class="nav-left">
@@ -85,19 +86,25 @@
                 </div>
               </li>
             </ul>
-            <u class="list-unstyled ps-0">
-            {% for category in all_category %}
-    {{ category.name }}
+<ul>
+  {% for category in all_category %}
+    <button type="button" class="btn btn-warning">{{ category.name }}</button>
       {% for sub in category.subcategory_set.all %}
-        <p>{{ sub.category }}</p>
+        {% if sub.post_set.all.count > 0 %}
+        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#{{ sub.category|slugify }}-collapse" aria-expanded="true">
+          {{ sub.category }}<span class="small text-muted">({{sub.post_set.all.count}})</span>
+        </button>
+        {% endif %}
+        <div class="collapse show" id="{{ sub.category|slugify }}-collapse">
         <ul>
-          {% for post in sub.post_set.all %}
-            <li><p><a href="{% url 'post_detail' post.id %}"> {{post.title }}</a></p></li>
-          {% endfor %}
-          </ul>
+        {% for post in sub.post_set.all %}
+          <li><p><a href="{% url 'post_detail' post.id %}"> {{ post.title|title }}</a></p></li>
+        {% endfor %}
+        </ul>
+        </div>
       {% endfor %}
   {% endfor %}
-</u>
+</ul>
     </div>
     <div class="col-md-10">
         {% block content %}

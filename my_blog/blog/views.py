@@ -7,11 +7,21 @@ from django.urls import reverse_lazy
 from django.contrib import messages
 from django.db.models import Q
 
+# Set global query.
+all_category = Category.objects.all()
+all_subcategory = SubCategory.objects.all()
+
 def home(request):
     all_post = Post.objects.all().values()
-    all_category = Category.objects.all()
-    #all_post = Post.objects.filter(title__icontains='day')
-    return render(request, 'home.html', {'all_post': all_post, 'all_category': all_category})
+    context = {
+        'all_post': all_post, 
+        'all_category': all_category, 
+        'all_subcategory': all_subcategory
+    }
+    return render(request, 'home.html', context)
+
+def category(request):
+    return render(request, 'category.html' ,{'all_category': all_category})
 
 def search(request):
     search_result = []
@@ -25,7 +35,13 @@ def post_detail(request, id):
     post = Post.objects.get(id=id)
     #comment = Comment.objects.get(id=id)
     query = Comment.objects.filter(title_id=id)
-    return render(request, 'post_detail.html', {'post': post, 'query': query})
+    context = {
+       'post': post, 
+       'query': query, 
+       'all_category': all_category,
+       'all_subcategory': all_subcategory 
+    }
+    return render(request, 'post_detail.html', context)
 
 class post_new(CreateView):
     model = Post
