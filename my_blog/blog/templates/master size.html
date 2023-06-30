@@ -13,18 +13,6 @@
 
 <body>
     <header class="p-3 bg-dark">
-        <!--        <div class="nav-left">
-            <h1><a href="{% url 'home' %}" > My Blog</a></h1>
-        </div>
-        <div class="">
-            {% if user.is_authenticated %}
-                <p>hi {{ user.username }}!</p>
-                <a href="{% url 'logout' %}">Log out</a>
-            {% else %}
-                <p>You are not logged in.</p>
-            {% endif %}
-        </div>
-    -->
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">My Blog</a>
@@ -53,71 +41,10 @@
       </div>
     </header>
 <div class="row">
-    <!-- <div class="col-md-2">
-            <ul class="list-unstyled ps-0">
-              <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
-                  Home
-                </button>
-                <div class="collapse" id="home-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                    <li><a href="{% url 'home' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Main Pages</a></li>
-                    <li><a href="{% url 'post_new' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">News Post</a></li>
-                  </ul>
-                </div>
-              </li>
-              <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                  Account
-                </button>
-                <div class="collapse show" id="account-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                    {% if user.is_anonymous %}
-                    <li><a href="{% url 'login' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Login</a></li>
-                    <li><a href="{% url 'sign_up' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign up</a></li>
-                    {% else %}
-                    <li><a href="{% url 'password_change' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Password Change</a></li>
-                    <li><a href="{% url 'password_reset' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Password Reset</a></li>
-                    {% endif %}
-                    {% if user.is_superuser %}
-                    <li><a href="/admin" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Admin Panel</a></li>
-                    {% endif %}   
-                  </ul>
-                </div>
-              </li>
-            </ul>
-<ul>
-  {% for category in all_category %}
-    <button type="button" class="btn btn-warning">{{ category.name }}</button>
-      {% for sub in category.subcategory_set.all %}
-        {% if sub.post_set.all.count > 0 %}
-        <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#{{ sub.category|slugify }}-collapse" aria-expanded="true">
-          {{ sub.category }}<span class="small text-muted">({{sub.post_set.all.count}})</span>
-        </button>
-        {% endif %}
-        <div class="collapse show" id="{{ sub.category|slugify }}-collapse">
-        <ul>
-        {% for post in sub.post_set.all %}
-          <li><p><a href="{% url 'post_detail' post.id %}"> {{ post.title|title }}</a></p></li>
-        {% endfor %}
-        </ul>
-        </div>
-      {% endfor %}
-  {% endfor %}
-</ul>
-    </div>-->
-    <div class="col-md-1">
-    </div>
-    <div class="col-md-10 bg-light">
+    <div class="px-5 col-md-12 bg-light">
         {% block content %}
         {% endblock %}
     </div>
-    <div class="col-md-1">
-    </div>
-<!--    <div class="col-md-2">
-        
-    </div>
--->
 </div>
 </body>
 </html>

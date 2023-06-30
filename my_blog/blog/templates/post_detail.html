@@ -2,9 +2,9 @@
 {% extends 'master size.html' %}
 {% block title%}Content of blog{% endblock %}
 {% block content %}
-    <div class="post-entry">
+    <div class="">
       <h1>{{ post.title }}</h1>
-      <p>{{ post.body | safe}}</p>
+      <p class="">{{ post.body | safe}}</p>
       <p></p>
       <hr>
       {% for x in query %}
