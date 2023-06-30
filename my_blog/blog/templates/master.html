@@ -88,10 +88,10 @@
             </ul>
 <ul>
   {% for category in all_category %}
-    <p class="m-0 p-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>
+    <p class="m-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>
       {% for sub in category.subcategory_set.all %}
         {% if sub.post_set.all.count > 0 %}
-        <p class="m-0 p-0">
+        <p class="m-0">
           <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#{{ sub.category|slugify }}-collapse" aria-expanded="true">
           {{ sub.category }}<span class="small text-muted">({{sub.post_set.all.count}})</span>
           </button>
@@ -100,7 +100,7 @@
         <div class="collapse show" id="{{ sub.category|slugify }}-collapse">
         <ul>
         {% for post in sub.post_set.all %}
-          <li><a href="{% url 'post_detail' post.id %}"> {{post.title|title|linebreaks}}</a></li>
+          <p class="m-0"><li><a href="{% url 'post_detail' post.id %}"> {{post.title|title}}</a></li></p>
         {% endfor %}
         </ul>
         </div>
