@@ -134,7 +134,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = 'home'
 LOGOUT_REDIRECT_URL = 'home'
 CRISPY_TEMPLATE_PACK = 'Bootstrap5'
-#AUTH_USER_MODEL = 'accounts.CustomUser'
+# Custome User extend
+AUTH_USER_MODEL = 'blog.User'
 
 # Media Root path
 MEDIA_URL = '/media/'

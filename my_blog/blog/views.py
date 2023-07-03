@@ -12,7 +12,7 @@ all_category = Category.objects.all()
 all_subcategory = SubCategory.objects.all()
 
 def home(request):
-    all_post = Post.objects.all().values()
+    all_post = Post.objects.all()
     context = {
         'all_post': all_post, 
         'all_category': all_category, 
