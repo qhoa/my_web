@@ -17,3 +17,5 @@ https://django-mptt.readthedocs.io/en/latest/index.html
 https://www.pythontutorial.net/django-tutorial/django-user-profile/
 https://dev.to/earthcomfy/django-user-profile-3hik
 https://www.devhandbook.com/django/user-profile/
+# Django Profiles 
+https://dev.to/earthcomfy/django-user-profile-3hik
