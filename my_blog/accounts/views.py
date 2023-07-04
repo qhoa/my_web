@@ -4,10 +4,9 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from .forms import register_form
 from django.contrib import messages
-from django.contrib.auth import login, get_user_model
+from django.contrib.auth import login
 
 # Create your views here.
-User = get_user_model()
 
 class sign_up(generic.CreateView):
     form_class = UserCreationForm

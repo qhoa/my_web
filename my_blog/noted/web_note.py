@@ -1,5 +1,9 @@
 # Custom model
 https://www.webforefront.com/django/customusermodel.html
+https://docs.djangoproject.com/en/4.2/topics/auth/customizing/
+## Error signup form with custom user model
+https://stackoverflow.com/questions/17873855/manager-isnt-available-user-has-been-swapped-for-pet-person
+
 # Build-in html templaces
 https://docs.djangoproject.com/en/4.2/ref/templates/builtins/#linenumbers
 #  Upload image to django
