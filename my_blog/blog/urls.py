@@ -1,4 +1,4 @@
-from django.urls import path, re_path
+from django.urls import path
 from blog import views
 from .views import post_new, post_delete, post_update
 from django.contrib.auth.decorators import login_required
@@ -14,6 +14,7 @@ urlpatterns = [
     path('post/new', login_required(post_new.as_view()), name='post_new'),
     path('post/<int:pk>/update/',  post_update.as_view(), name='post_update'),
     path('post/<int:pk>/delete/',  login_required(post_delete.as_view()), name='post_delete'),
+    path('profile/<int:id>', views.profile_detail, name='profile_detail'),
 ]
 # Path of media files
 urlpatterns = urlpatterns + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
-from .models import Post, Comment, Category, SubCategory
+from .models import Post, Comment, Category, SubCategory, User
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -33,7 +33,6 @@ def search(request):
 
 def post_detail(request, id):
     post = Post.objects.get(id=id)
-    #comment = Comment.objects.get(id=id)
     query = Comment.objects.filter(title_id=id)
     context = {
        'post': post, 
@@ -42,6 +41,10 @@ def post_detail(request, id):
        'all_subcategory': all_subcategory 
     }
     return render(request, 'post_detail.html', context)
+
+def profile_detail(request, id):
+    profile = User.objects.get(id=id)
+    return render(request, 'profile_detail.html', {'profile': profile})
 
 class post_new(CreateView):
     model = Post

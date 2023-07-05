@@ -31,7 +31,9 @@
   
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="{% url 'profile_detail' user.id %}" class="nav-link px-2 text-white">Profile</a></li>
+            {% endif %}
             <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
             <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
             <li><a href="#" class="nav-link px-2 text-white">About</a></li>
@@ -55,7 +57,7 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2">
-            <ul class="list-unstyled ps-0">
+      <ul class="list-unstyled ps-0">
               <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                   Home
@@ -86,9 +88,29 @@
                   </ul>
                 </div>
               </li>
-            </ul>
-<ul>
   {% for category in all_category %}
+    <p class="m-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>
+    <div class="bg-dark">AAAA</div>
+      {% for sub in category.subcategory_set.all %}
+        {% if sub.post_set.all.count > 0 %}
+          <p class="m-0">
+            <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#{{ sub.category|slugify }}-collapse" aria-expanded="true">
+            {{ sub.category }}<span class="small text-muted">({{sub.post_set.all.count}})</span>
+            </button>
+          </p>
+        {% endif %}
+        <div class="collapse show" id="{{ sub.category|slugify }}-collapse">
+        <ul>
+        {% for post in sub.post_set.all %}
+          <p class="m-0"><li><a href="{% url 'post_detail' post.id %}"> {{post.title|title}}</a></li></p>
+        {% endfor %}
+        </ul>
+        </div>
+      {% endfor %}
+  {% endfor %}
+      </ul>
+<!-- <ul>
+ {% for category in all_category %}
     <p class="m-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>
       {% for sub in category.subcategory_set.all %}
         {% if sub.post_set.all.count > 0 %}
@@ -107,7 +129,7 @@
         </div>
       {% endfor %}
   {% endfor %}
-</ul>
+</ul> -->
     </div>
     <div class="col-md-10">
         {% block content %}
