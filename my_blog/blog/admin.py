@@ -16,7 +16,7 @@ class CustomUserAdmin(UserAdmin):
     form = CustomUserChangeForm
     add_form = CustomUserCreationForm
 
-    fieldsets = UserAdmin.fieldsets + (("Extra Information", {"fields": ["age", "birthday", "telephone"]}),)
+    fieldsets = UserAdmin.fieldsets + (("Extra Information", {"fields": ["age", "birthday", "telephone", "avatar"]}),)
     add_fieldsets = UserAdmin.add_fieldsets + (("Extra Information", {"fields": ["age"]}),)
 
     # The fields to be used in displaying the User model.

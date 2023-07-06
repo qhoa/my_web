@@ -3,7 +3,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <!-- <link rel="stylesheet" href="{% static 'css/base.css' %}">  -->
     <link rel="stylesheet" href="{% static 'css/sidebars.css' %}">
     <title>{% block title %}{% endblock %}</title>
     {% load bootstrap5 %}
@@ -28,7 +28,6 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">My Blog</a>
-  
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
             {% if user.is_authenticated %}
@@ -56,7 +55,8 @@
     </header>
 <div class="container">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2 border border-light bg-white">
+      <div class="m-1 p-2 bg-secondary rounded-3 text-white">Main</div>
       <ul class="list-unstyled ps-0">
               <li class="mb-1">
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
@@ -89,8 +89,8 @@
                 </div>
               </li>
   {% for category in all_category %}
-    <p class="m-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>
-    <div class="bg-dark">AAAA</div>
+    <!--<p class="m-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>-->
+    <div class="p-2 bg-secondary rounded-3 text-white">{{category.name}}</div>
       {% for sub in category.subcategory_set.all %}
         {% if sub.post_set.all.count > 0 %}
           <p class="m-0">

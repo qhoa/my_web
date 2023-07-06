@@ -10,6 +10,7 @@ class User(AbstractUser):
     age = models.IntegerField(null=True, blank=True)
     telephone = models.CharField(max_length=15, blank=True, null=True)
     birthday = models.DateField(null=True)
+    avatar = models.ImageField(default='default.jpg', upload_to='profile/')
 
 class Category(models.Model):
     name = models.CharField(max_length=100)
