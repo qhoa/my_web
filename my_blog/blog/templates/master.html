@@ -13,29 +13,23 @@
 
 <body>
     <header class="p-3 bg-dark">
-        <!--        <div class="nav-left">
-            <h1><a href="{% url 'home' %}" > My Blog</a></h1>
-        </div>
-        <div class="">
-            {% if user.is_authenticated %}
-                <p>hi {{ user.username }}!</p>
-                <a href="{% url 'logout' %}">Log out</a>
-            {% else %}
-                <p>You are not logged in.</p>
-            {% endif %}
-        </div>
-    -->
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
           <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-white text-decoration-none">My Blog</a>
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-            <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'profile' %}" class="nav-link px-2 text-white">Profile</a></li>
+            <li><a href="{% url 'profile' %}" class="nav-link px-2 text-secondary">Profile</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary dropdown-toggle" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">Accounts</a>
+              <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="{% url 'password_change' %}">Change Password</a></li>
+                <li><a class="dropdown-item" href="{% url 'password_reset' %}">Reset Password</a></li>
+                {% if user.is_superuser %}
+                <li><a class="dropdown-item" href="/admin">Admin Panel</a></li>
+                {% endif %}
+              </ul>
+            </li>
             {% endif %}
-            <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-            <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+            <li><a href="#" class="nav-link px-2 text-secondary">About</a></li>
           </ul>
   
           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search" action="{% url 'search' %}" method="get" >
@@ -68,34 +62,14 @@
                 <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#home-collapse" aria-expanded="true">
                   Home
                 </button>
-                <div class="collapse" id="home-collapse">
+                <div class="collapse show" id="home-collapse">
                   <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
                     <li><a href="{% url 'home' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Main Pages</a></li>
                     <li><a href="{% url 'post_new' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">News Post</a></li>
                   </ul>
                 </div>
               </li>
-              <li class="mb-1">
-                <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#account-collapse" aria-expanded="false">
-                  Account
-                </button>
-                <div class="collapse show" id="account-collapse">
-                  <ul class="btn-toggle-nav list-unstyled fw-normal pb-1">
-                    {% if user.is_anonymous %}
-                    <li><a href="{% url 'login' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Login</a></li>
-                    <li><a href="{% url 'sign_up' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Sign up</a></li>
-                    {% else %}
-                    <li><a href="{% url 'password_change' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Password Change</a></li>
-                    <li><a href="{% url 'password_reset' %}" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Password Reset</a></li>
-                    {% endif %}
-                    {% if user.is_superuser %}
-                    <li><a href="/admin" class="link-body-emphasis d-inline-flex text-decoration-none rounded">Admin Panel</a></li>
-                    {% endif %}   
-                  </ul>
-                </div>
-              </li>
   {% for category in all_category %}
-    <!--<p class="m-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>-->
     <div class="p-2 bg-secondary rounded-3 text-white">{{category.name}}</div>
       {% for sub in category.subcategory_set.all %}
         {% if sub.post_set.all.count > 0 %}
@@ -115,36 +89,11 @@
       {% endfor %}
   {% endfor %}
       </ul>
-<!-- <ul>
- {% for category in all_category %}
-    <p class="m-0"><button type="button" class="btn btn-warning">{{category.name}}</button></p>
-      {% for sub in category.subcategory_set.all %}
-        {% if sub.post_set.all.count > 0 %}
-        <p class="m-0">
-          <button class="btn btn-toggle d-inline-flex align-items-center rounded border-0 collapsed" data-bs-toggle="collapse" data-bs-target="#{{ sub.category|slugify }}-collapse" aria-expanded="true">
-          {{ sub.category }}<span class="small text-muted">({{sub.post_set.all.count}})</span>
-          </button>
-        </p>
-        {% endif %}
-        <div class="collapse show" id="{{ sub.category|slugify }}-collapse">
-        <ul>
-        {% for post in sub.post_set.all %}
-          <p class="m-0"><li><a href="{% url 'post_detail' post.id %}"> {{post.title|title}}</a></li></p>
-        {% endfor %}
-        </ul>
-        </div>
-      {% endfor %}
-  {% endfor %}
-</ul> -->
     </div>
     <div class="col-md-10">
         {% block content %}
         {% endblock %}
     </div>
-<!--    <div class="col-md-2">
-        
-    </div>
--->
   </div>
 </div>
 </body>

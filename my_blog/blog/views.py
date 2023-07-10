@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment, Category, SubCategory, User
-from .forms import SignUpForm, ProfileUpdateForm
+from .forms import SignUpForm, ProfileUpdateForm, NewPostForm
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -43,15 +43,6 @@ def post_detail(request, id):
     }
     return render(request, 'post_detail.html', context)
 
-#def profile_detail(request, id):
-#    profile = User.objects.get(id=id)
-#    return render(request, 'profile_detail.html', {'profile': profile})
-
-#class sign_up(CreateView):
-#    form_class = UserCreationForm
-#    template_name = 'registration/signup.html'
-#    success_url = reverse_lazy('home')
-
 def sign_up(request):
     if request.method == 'GET':
         context = {'form': SignUpForm()}
@@ -86,10 +77,15 @@ def profile_update(request, id):
         else:
             return render(request,'profile_update.html', context)
 
-class post_new(CreateView):
-    model = Post
-    template_name = 'post_new.html'
-    fields = ['title', 'author', 'body']
+def post_new(request, self):
+    if request.method == 'GET':
+        context = {'form': NewPostForm()}
+        return render(request, 'post_new.html', context)
+
+#class post_new(CreateView):
+#    model = Post
+#    template_name = 'post_new.html'
+#    fields = ['title', 'author', 'body']
 
 class post_update(UpdateView):
     model = Post
@@ -100,15 +96,6 @@ class post_delete(DeleteView):
     model = Post
     template_name = 'post_delete.html'
     success_url = reverse_lazy('home')
-
-#class profile_update(UpdateView):
-#    def myview(request, pk):
-#        if pk != request.user.id:
-#            HttpResponseForbidden('You cannot view what is not yours') #Or however you want to handle this
-#    model = User
-#    template_name ='profile_update.html'
-#    fields = ['username','first_name', 'last_name', 'email', 'avatar']
-#    success_url = reverse_lazy('profile')
 
     
 

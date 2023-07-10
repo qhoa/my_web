@@ -43,10 +43,3 @@ class Comment(models.Model):
     def __str__(self):
         #return self.comment
         return str(self.title)
-
-#class Profile(models.Model):
-#    user = models.OneToOneField(User, on_delete=models.CASCADE)
-#    avatar = models.ImageField(default='default.jpg', upload_to='profile')
-#    def __str__(self):
-#        return str(self.user.username)
-
