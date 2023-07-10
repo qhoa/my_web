@@ -31,7 +31,7 @@
           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
             <li><a href="#" class="nav-link px-2 text-secondary">Home</a></li>
             {% if user.is_authenticated %}
-            <li><a href="{% url 'profile_detail' user.id %}" class="nav-link px-2 text-white">Profile</a></li>
+            <li><a href="{% url 'profile' %}" class="nav-link px-2 text-white">Profile</a></li>
             {% endif %}
             <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
             <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
@@ -56,6 +56,12 @@
 <div class="container">
   <div class="row">
     <div class="col-md-2 border border-light bg-white">
+      {% if user.is_authenticated %}
+      <div>
+        <p align="center">Hi, <strong>{{user.username}}</strong>!</p>
+        <p align="center"><img src="{{MEDIA_URL}}{{user.avatar}}" class="img-thumbnail rounded-circle border-0" alt=""></p>
+      </div>
+      {% endif %}
       <div class="m-1 p-2 bg-secondary rounded-3 text-white">Main</div>
       <ul class="list-unstyled ps-0">
               <li class="mb-1">
