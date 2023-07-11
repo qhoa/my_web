@@ -77,15 +77,16 @@ def profile_update(request, id):
         else:
             return render(request,'profile_update.html', context)
 
-def post_new(request, self):
-    if request.method == 'GET':
-        context = {'form': NewPostForm()}
-        return render(request, 'post_new.html', context)
-
-#class post_new(CreateView):
-#    model = Post
-#    template_name = 'post_new.html'
-#    fields = ['title', 'author', 'body']
+def post_new(request):
+    if request.method == 'POST':
+        form = NewPostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.author = request.user
+            post.save()
+        return redirect('post_new')
+    else:
+        return render(request, 'post_new.html', {'form': NewPostForm()})
 
 class post_update(UpdateView):
     model = Post
