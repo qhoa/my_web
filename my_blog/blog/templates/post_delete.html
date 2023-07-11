@@ -1,11 +1,15 @@
 <!-- templates/home.html -->
 {% extends 'master.html' %}
-{% block title%}Content of blog{% endblock %}
+{% block title%}Delete Post{% endblock %}
 {% block content %}
-      <h1>Delete post</h1>
+<div class="">
+    <h1>Delete Post</h1>
       <form action="" method="post">
         {% csrf_token %}
-        <p>Are you sure to delete "{{ post.title }}" ?</p>
-      <input type="submit" value="Delete">
-      </form>  
+        <p>Are you sure to delete <span style="color: red;font-weight: bold;"> "{{ post.title|title }}"</span> ?</p>
+      </form>
+      <p>
+        <input class="btn btn-success" type="submit" value="Delete">
+      </p>
+</div>
 {% endblock %}

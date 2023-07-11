@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import User, Post
+from .models import User, Post, Category, SubCategory
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 
@@ -25,7 +25,17 @@ class ProfileUpdateForm(ModelForm):
         model = User
         fields = ['first_name', 'last_name', 'email', 'telephone', 'avatar']
 
-class NewPostForm(ModelForm):
+class PostForm(ModelForm):
     class Meta:
         model = Post
-        fields = ['title', 'author', 'body']
+        fields = ['title','parent','category','body']
+
+class CategoryForm(ModelForm):
+    class Meta:
+        model = Category
+        fields = ['name']
+
+class SubCategoryForm(ModelForm):
+    class Meta:
+        model = SubCategory
+        fields = ['category']

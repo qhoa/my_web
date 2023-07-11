@@ -3,13 +3,12 @@
 {% block title%}Home pages{% endblock %}
 {% block content %}
   {% for x in search_result %}
-    <div class="bg-light p-2 rounded">
-      <h2>{{ x.title }}</h2>
-      <p class="">{{ x.body | safe}}</p>
-      <p align="left">
-        <a class="btn-sm btn-success" href="{% url 'post_detail' x.id %}" role="button">Details &raquo;</a>
-      </p>
-    </div>
-    <p></p>
+  <div class="bg-light m-3 p-2 rounded">
+    <h3><a href="{% url 'post_detail' x.id %}">{{x.title|title}}</a></h3>
+    <p class="">{{ x.body|truncatechars_html:200|safe}}</p>
+    <p align="left">
+      <a class="btn-sm btn-success" href="{% url 'post_detail' x.id %}" role="button">Details &raquo;</a>
+    </p>
+  </div>
   {% endfor %}
 {% endblock %}

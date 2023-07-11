@@ -4,10 +4,10 @@ from .forms import CustomUserChangeForm, CustomUserCreationForm
 from .models import Post, Comment, Category, SubCategory, User
 
 class MenuPostAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['title', 'author']
 
 class MenuCommentAdmin(admin.ModelAdmin):
-    list_display = ['title']
+    list_display = ['title', 'author']
 
 #class MenuUserAdmin(admin.ModelAdmin):
 #    pass

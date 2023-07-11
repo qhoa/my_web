@@ -1,11 +1,10 @@
 <!-- templates/home.html -->
 {% extends 'master.html' %}
-{% block title%}Content of blog{% endblock %}
+{% block title%}Blog Post{% endblock %}
 {% block content %}
     <div class="">
-      <h1>{{ post.title }}</h1>
+      <h1>{{ post.title|title }}</h1>
       <p class="">{{ post.body | safe}}</p>
-      <p></p>
       <hr>
       {% for x in query %}
       <figure>
@@ -18,7 +17,9 @@
       </figure>
       <hr>
       {% endfor %}
+      <p>
+        <a class="btn btn-success" role="button" href="{% url 'post_update' post.id %}">Update</a>
+        <a class="btn btn-success" role="button" href="{% url 'post_delete' post.id %}">Delete</a>
+      </p>
     </div>
-    <a class="btn btn-success" role="button" href="{% url 'post_update' post.id %}">Update</a>
-    <a class="btn btn-success" role="button" href="{% url 'post_delete' post.id %}">Delete</a>
 {% endblock %}

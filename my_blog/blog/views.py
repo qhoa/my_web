@@ -1,7 +1,7 @@
 from django.http import HttpResponse, HttpResponseForbidden
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Post, Comment, Category, SubCategory, User
-from .forms import SignUpForm, ProfileUpdateForm, NewPostForm
+from .forms import SignUpForm, ProfileUpdateForm, PostForm, CategoryForm
 from django.views.generic import ListView, DetailView, CreateView
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
@@ -20,6 +20,9 @@ def home(request):
         'all_subcategory': all_subcategory
     }
     return render(request, 'home.html', context)
+
+def about(request):
+    return render(request, 'about.html')
 
 def category(request):
     return render(request, 'category.html' ,{'all_category': all_category})
@@ -79,19 +82,31 @@ def profile_update(request, id):
 
 def post_new(request):
     if request.method == 'POST':
-        form = NewPostForm(request.POST)
+        form = PostForm(request.POST)
         if form.is_valid():
             post = form.save(commit=False)
             post.author = request.user
             post.save()
-        return redirect('post_new')
+            return redirect('post_detail', id=post.id)
     else:
-        return render(request, 'post_new.html', {'form': NewPostForm()})
+        context = {'form': PostForm()}
+        return render(request, 'post_new.html', context)
 
-class post_update(UpdateView):
-    model = Post
-    template_name = 'post_update.html'
-    fields = ['title', 'body']
+def post_update(request, id):
+    post = get_object_or_404(Post, id=id)
+    if request.method == 'POST':
+        form = PostForm(request.POST, instance=post)
+        if form.is_valid():
+            form.save()
+            return redirect('post_detail', id=id)
+    else:
+        context = {'form': PostForm(instance=post), 'id': id}
+        return render(request, 'post_update.html', context)
+
+#class post_update(UpdateView):
+#    model = Post
+#    template_name = 'post_update.html'
+#    fields = ['title', 'body']
 
 class post_delete(DeleteView):
     model = Post
