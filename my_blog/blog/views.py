@@ -94,14 +94,17 @@ def post_new(request):
 
 def post_update(request, id):
     post = get_object_or_404(Post, id=id)
-    if request.method == 'POST':
-        form = PostForm(request.POST, instance=post)
-        if form.is_valid():
-            form.save()
-            return redirect('post_detail', id=id)
+    if request.user == post.author:
+        if request.method == 'POST':
+            form = PostForm(request.POST, instance=post)
+            if form.is_valid():
+                form.save()
+                return redirect('post_detail', id=id)
+        else:
+            context = {'form': PostForm(instance=post), 'id': id}
+            return render(request, 'post_update.html', context)
     else:
-        context = {'form': PostForm(instance=post), 'id': id}
-        return render(request, 'post_update.html', context)
+        return redirect('post_detail', id=id)
 
 #class post_update(UpdateView):
 #    model = Post

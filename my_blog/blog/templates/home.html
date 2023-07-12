@@ -3,7 +3,7 @@
 {% block title%}Home pages{% endblock %}
 {% block content %}
   {% for x in all_post reversed %}
-  <div class="bg-light mb-3 p-2 rounded-5">
+  <div class="bg-light mb-3 p-2 rounded">
     <h3><a style="text-decoration: none;" href="{% url 'post_detail' x.id %}">{{x.title|title}}</a></h3>
     <p class="">{{x.body|truncatechars_html:280|safe}}</p>
     <p align="left">

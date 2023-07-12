@@ -39,7 +39,7 @@ class Post(models.Model):
 class Comment(models.Model):
     title = models.ForeignKey(Post, on_delete=models.CASCADE)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    comment = RichTextField()
+    body = RichTextField()
     def __str__(self):
         #return self.comment
         return str(self.title)
