@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm
-from .models import User, Post, Category, SubCategory
+from .models import User, Post, Category, SubCategory, Comment
 from django.contrib.auth.forms import UserCreationForm, UserChangeForm
 from django.contrib.auth import get_user_model
 
@@ -39,3 +39,8 @@ class SubCategoryForm(ModelForm):
     class Meta:
         model = SubCategory
         fields = ['category']
+
+class CommentForm(ModelForm):
+    class Meta:
+        model = Comment
+        fields = ['body']
