@@ -106,7 +106,7 @@ def post_new(request):
 
 def post_update(request, id):
     post = get_object_or_404(Post, id=id)
-    if request.user == post.author:
+    if (request.user == post.author or request.user.is_superuser):
         if request.method == 'POST':
             form = PostForm(request.POST, instance=post)
             if form.is_valid():

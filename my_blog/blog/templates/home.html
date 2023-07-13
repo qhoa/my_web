@@ -5,6 +5,7 @@
   {% for x in all_post reversed %}
   <div class="bg-light mb-3 p-2 rounded">
     <h3><a style="text-decoration: none;" href="{% url 'post_detail' x.id %}">{{x.title|title}}</a></h3>
+    <p class="text-muted" style="font-size: small;">by QHOA Date: 11.11.22</p>
     <p class="">{{x.body|truncatechars_html:280|safe}}</p>
     <p align="left">
       <a class="btn-sm btn-success" href="{% url 'post_detail' x.id %}" role="button">Details &raquo;</a>
